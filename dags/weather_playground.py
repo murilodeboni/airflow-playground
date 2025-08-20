@@ -78,14 +78,6 @@ with DAG(
             python_callable=fetch_weather,
         )
 
-        wait_for_file = FileSensor(
-            task_id="wait_for_file",
-            filepath="{{ ti.xcom_pull(task_ids='extract.fetch') }}",
-            poke_interval=10,
-            timeout=60,
-            mode="reschedule",
-        )
-
     transform = PythonOperator(
         task_id="transform",
         python_callable=transform_weather,
@@ -110,5 +102,5 @@ with DAG(
         trigger_rule=TriggerRule.NONE_FAILED_MIN_ONE_SUCCESS
     )
 
-    start >> fetch >> wait_for_file >> transform >> decide
+    start >> fetch >> transform >> decide
     decide >> [hot, cool] >> end
