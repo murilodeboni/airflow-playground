@@ -8,7 +8,6 @@ from airflow import DAG
 from airflow.operators.empty import EmptyOperator
 from airflow.operators.bash import BashOperator
 from airflow.operators.python import PythonOperator, BranchPythonOperator
-from airflow.sensors.filesystem import FileSensor
 from airflow.utils.trigger_rule import TriggerRule
 from airflow.utils.task_group import TaskGroup
 

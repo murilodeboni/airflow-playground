@@ -25,10 +25,6 @@ services:
       test: ["CMD", "pg_isready", "-U", "airflow"]
     restart: unless-stopped
 
-  redis:
-    image: redis:7
-    restart: unless-stopped
-
   airflow-init:
     <<: *airflow-common
     depends_on:
